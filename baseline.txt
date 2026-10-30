@@ -1,0 +1,46 @@
+time ./out/graph_traverse --write 1 graph-rand.bin
+time ./out/graph_traverse --write --no-cache 1 graph-rand.bin
+
+/usr/bin/time -v ./out/graph_traverse --write 1 graph-rand.bin
+/usr/bin/time -v ./out/graph_traverse --write --no-cache 1 graph-rand.bin
+
+strace -c ./out/graph_traverse --write 1 graph-rand.bin
+strace -c ./out/graph_traverse --write --no-cache 1 graph-rand.bin
+
+perf stat -e task-clock,context-switches,cpu-migrations,page-faults,\
+cache-references,cache-misses,cycles,instructions \
+  taskset -c 2 ./out/graph_traverse --write 1 graph-rand.bin
+
+perf stat -e task-clock,context-switches,cpu-migrations,page-faults,\
+cache-references,cache-misses,cycles,instructions \
+  taskset -c 2 ./out/graph_traverse --write --no-cache 1 graph-rand.bin
+
+
+
+
+
+time ./out/graph_traverse_mmap --write 1 graph-rand.bin
+time ./out/graph_traverse_mmap --write --no-cache 1 graph-rand.bin
+
+/usr/bin/time -v ./out/graph_traverse_mmap --write 1 graph-rand.bin
+/usr/bin/time -v ./out/graph_traverse_mmap --write --no-cache 1 graph-rand.bin
+
+strace -c ./out/graph_traverse_mmap --write 1 graph-rand.bin
+strace -c ./out/graph_traverse_mmap --write --no-cache 1 graph-rand.bin
+
+perf stat -e task-clock,context-switches,cpu-migrations,page-faults,\
+cache-references,cache-misses,cycles,instructions \
+  taskset -c 2 ./out/graph_traverse_mmap --write 1 graph-rand.bin
+
+perf stat -e task-clock,context-switches,cpu-migrations,page-faults,\
+cache-references,cache-misses,cycles,instructions \
+  taskset -c 2 ./out/graph_traverse_mmap --write --no-cache 1 graph-rand.bin
+
+
+
+
+
+
+
+
+
